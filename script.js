@@ -22,7 +22,7 @@ arr.forEach((button) => {
             }
         } else if (e.target.innerHTML === "DEL") {
             if (input.value === "") {
-                alert("Enter Number to Delete");
+                alert("Enter number to delete");
             } else {
                 string = string.substring(0, string.length - 1);
                 input.value = string;
@@ -36,7 +36,10 @@ arr.forEach((button) => {
                 input.value = string;
             }
         } else if (isOperator(e.target.innerHTML)) {
-            if (isOperator(string[string.length - 1])) {
+            if (string === "") {
+                alert("Enter a number first");
+                return;
+            } else if (isOperator(string[string.length - 1])) {
                 string = string.slice(0, string.length - 1);
             }
             string += e.target.innerHTML;

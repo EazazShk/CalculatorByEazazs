@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: lightblue;
+}
+
+.calculator {
+    border: 1px solid #09090a;
+    padding: 20px;
+    border-radius: 16px;
+    background: whitesmoke;
+}
+
+input {
+    width: 320px;
+    border: none;
+    padding: 24px;
+    margin: 10px;
+    background: transparent;
+    border: solid;
+    border-radius: 20px;
+    font-size: 40px;
+    text-align: right;
+    cursor: pointer;
+    color: #1cd777;
+}
+
+input::placeholder {
+    color: #1cd777;
+}
+
+button {
+    border: none;
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    border-radius: 20%;
+    color: black;
+    font-size: 24px;
+    border: solid;
+    cursor: pointer;
+}
+button:hover {
+    transform: scale(1.1);
+    color: #1cd777;
+}
+button:active {
+    opacity: 0.4;
+    background-color: azure;
+}
+.equalBtn {
+    background-color: #fb7c14;
+}
+
+.operator,
+#toggleSign {
+    color: #190aee;
+}
+
+.operator:hover,
+#toggleSign:hover {
+    color: rgb(64, 30, 201);
+}
+.operator:active,
+#toggleSign:active {
+    background-color: red;
+}

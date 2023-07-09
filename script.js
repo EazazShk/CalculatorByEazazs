@@ -3,20 +3,30 @@ let buttons = document.querySelectorAll("button");
 
 let string = "";
 let arr = Array.from(buttons);
+
 arr.forEach((button) => {
     button.addEventListener("click", (e) => {
         if (e.target.innerHTML === "=") {
             if (string === "") {
-                alert("Enter a number first");
+                alert("Empty Input");
+                return;
+            }
+            if (isOperator(string[string.length - 1])) {
+                alert("Incomplete input");
                 return;
             }
             string = string.replace(/%/g, "/100");
-            string = eval(string);
-            if (isNaN(string)) {
-                alert("Invalid expression");
+            string = evaluateExpression(string);
+            if (string === "") {
                 input.value = "";
             } else {
-                input.value = string;
+                string = eval(string);
+                if (isNaN(string)) {
+                    alert("Invalid expression");
+                    input.value = "";
+                } else {
+                    input.value = string;
+                }
             }
         } else if (e.target.innerHTML === "AC") {
             if (string === "") {
@@ -34,7 +44,7 @@ arr.forEach((button) => {
             }
         } else if (e.target.id === "toggleSign") {
             if (input.value === "") {
-                alert("Enter a number first");
+                alert("Enter a number first to use the negative sign");
             } else {
                 string = eval(string);
                 string = -string;
@@ -42,16 +52,18 @@ arr.forEach((button) => {
             }
         } else if (isOperator(e.target.innerHTML)) {
             if (string === "") {
-                alert("Enter a number first");
+                alert("To use an operator, enter a number first");
                 return;
-            } else if (isOperator(string[string.length - 1])) {
-                string = string.slice(0, string.length - 1);
+            }
+            if (isOperator(string[string.length - 1])) {
+                alert("Two operators cannot be used consecutively");
+                return;
             }
             string += e.target.innerHTML;
             input.value = string;
         } else if (e.target.innerHTML === ".") {
             if (string.includes(".")) {
-                // Prevent multiple decimal points
+                alert("Two decimal points cannot be used in the same number");
                 return;
             } else {
                 string += e.target.innerHTML;
@@ -60,7 +72,7 @@ arr.forEach((button) => {
         } else {
             if (string === "0") {
                 string = e.target.innerHTML;
-            } else if (string.length < 10) {
+            } else if (string.length < 12) {
                 string += e.target.innerHTML;
             }
             input.value = string;
@@ -76,4 +88,16 @@ function isOperator(value) {
         value === "/" ||
         value === "%"
     );
+}
+
+function evaluateExpression(expression) {
+    if (expression.includes("/0")) {
+        alert("Cannot divide by zero");
+        return "";
+    }
+    if (expression.includes("*0")) {
+        alert("Cannot multiply by zero");
+        return "";
+    }
+    return expression;
 }
